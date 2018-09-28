@@ -20,6 +20,8 @@ Firebase:
 
 
 Task assignments:
-* Erik Woodworth 
+* Erik Woodworth - WebAudio source integration and other parameter functions
+* AJ Jordan - WebAudio ossilator and other parameter fucntions 
+* Hayden Estes - visual design layout, user validation
 
 
