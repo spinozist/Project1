@@ -2,18 +2,21 @@
 
 **MULTIUSER NOISE MANIPULATOR**
 
-noise/synth APIs
- > https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
- > http://www.sonicapi.com/
- > https://developer.spotify.com/documentation/web-api/
+Audo APIs:
+	https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
+	http://www.sonicapi.com/
+	https://developer.spotify.com/documentation/web-api/
 
-x,y touch interface [front end]
- > mostly touchpad
- > parameter assigner (i.e. x=frequency; y=amplitude)
- > other connected users 
-
+x,y touch interface:
+	mostly touchpad
+	parameter assigner (i.e. x=frequency; y=amplitude)
+	
 interface converter functions
- > ratio of x or y of touch/click range to ratio of parameter range
+	ratio of x or y of touch/click range to ratio of parameter range
+	
+Firebase:
+	play along with other connected users 
+
  
 HELPFUL REFERENCE CODE:
 
