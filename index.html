@@ -3,14 +3,40 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>multi-user noise generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">        
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
     <script src="assets/javascript/logic.js"></script>
 </head>
 <body>
-    
+    <div id="onload-screen">
+
+    </div>
+    <div id="user-buttons">
+        <div id="user-you"></div>
+        <div id="user2"></div>
+        <div id="user3"></div>
+        <div id="user4"></div>
+        <div id="user5"></div>
+        <div id="user6"></div>
+        <div id="user7"></div>
+        <div id="user8"></div>
+    </div>
+        <div id="page-wrapper" class="clearfix">
+            <canvas id="touchpad"></canvas>
+            <div id="info">
+              <p>
+                Frequency: <span id="frequency">n/a</span>
+              </p>
+              <p>
+                Volume: <span id="volume">n/a</span>
+              </p>
+            </div>
+          </div>
+
 </body>
 </html>
