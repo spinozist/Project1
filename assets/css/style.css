@@ -1,0 +1,20 @@
+/* possible trackpad */
+
+html, body {
+
+  background: #111;
+
+};  
+
+#touchpad {
+
+  background-color: rgb(97, 96, 96);
+  position: absolute;
+  width: 500px;
+  height: 350px;
+
+}
+
+#info {
+   /* color: white;*/
+}
