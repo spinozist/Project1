@@ -7,13 +7,6 @@ html, body {
 };  
 
 
-
-#touchpad:hover {
-	cursor: crosshair;
-};
-
-
-
 /* The slider itself */
 .slider {
    
