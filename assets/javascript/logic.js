@@ -1,69 +1,143 @@
-window.onload = function () {
+var SynthPad = (function () {
+    var myCanvas;
+    var frequency;
+    var volume;
 
-    // create web audio api context
-    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var myAudioContext;
+    var oscillator;
+    var gainNode;
 
-    // create Oscillator node
-    var oscillator = audioCtx.createOscillator();
+    var lowNote = 261.63; // C4
+    var highNote = 493.88; // B4
 
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime) // value in hertz
-    oscillator.connect(audioCtx.destination);
-    oscillator.detune.setValueAtTime(80, audioCtx.currentTime);
-    oscillator.start();
+    var SynthPad = function () {
+        myCanvas = $('canvas');
+        frequency = $('#frequency');
+        volume = $('#volume');
+        
+        // Create an audio context.
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;myAudioContext = new window.AudioContext();
+
+        SynthPad.setupEventListeners();
+        };
+
+        SynthPad.setupEventListeners = function () {
+            document.body.addEventListener('touchmove', function (event) {
+                event.preventDefault();
+            }, false);
+
+            myCanvas.addEventListener('mousedown', SynthPad.playSound);
+            myCanvas.addEventListener('touchstart', SynthPad.playSound);
+
+            myCanvas.addEventListener('mouseup', SynthPad.stopSound);
+            document.addEventListener('mouseleave', SynthPad.stopSound);
+            myCanvas.addEventListener('touchend', SynthPad.stopSound);
+        };
+
+        SynthPad.playSound = function (event) {
+            oscillator = myAudioContext.createOscillator();
+            gainNode = myAudioContext.createGain();
+
+            oscillator.type = 'triangle';
+
+            gainNode.connect(myAudioContext.destination);
+            oscillator.connect(gainNode);
+
+            SynthPad.updateFrequency(event);
+
+            oscillator.start(0);
+
+            myCanvas.addEventListener('mousemove', SynthPad.updateFrequency);
+            myCanvas.addEventListener('touchmove', SynthPad.updateFrequency);
+
+            myCanvas.addEventListener('mouseout', SynthPad.stopSound);
+        };
+
+        SynthPad.stopSound = function (event) {
+            oscillator.stop(0);
+
+            myCanvas.removeEventListener('mousemove', SynthPad.updateFrequency);
+            myCanvas.removeEventListener('touchmove', SynthPad.updateFrequency);
+            myCanvas.removeEventListener('mouseout', SynthPad.stopSound);
+        };
 
 
-    var audioCtx2 = new (window.AudioContext || window.webkitAudioContext)();
+        // Calculate the note frequency.
+        SynthPad.calculateNote = function (posX) {
+            var noteDifference = highNote - lowNote;
+            var noteOffset = (noteDifference / myCanvas.offsetWidth) * (posX - myCanvas.offsetLeft);
+            return lowNote + noteOffset;
+        };
 
-    // create Oscillator node2
-    var oscillator2 = audioCtx2.createOscillator();
 
-    oscillator2.type = 'sawtooth';
-    oscillator2.frequency.setValueAtTime(400, audioCtx2.currentTime); // value in hertz
-    oscillator2.connect(audioCtx2.destination);
-    oscillator2.detune.setValueAtTime(150, audioCtx2.currentTime);
-    oscillator2.start();
+        // Calculate the volume.
+        SynthPad.calculateVolume = function (posY) {
+            var volumeLevel = 1 - (((100 / myCanvas.offsetHeight) * (posY - myCanvas.offsetTop)) / 100);
+            return volumeLevel;
+        };
 
-}
 
-// synthpad function
-var SynthPad = function () {
-    myCanvas = $('#touchpad');
-    frequency = $('#frequency');
-    volume = $('#volume');
+        // Fetch the new frequency and volume.
+        SynthPad.calculateFrequency = function (x, y) {
+            var noteValue = SynthPad.calculateNote(x);
+            var volumeValue = SynthPad.calculateVolume(y);
 
-    // Create an audio context.
-    myAudioContext = new webkitAudioContext();
+            oscillator.frequency.value = noteValue;
+            gainNode.gain.value = volumeValue;
 
-    myCanvas.onmousemove = (e) => {
-        const x = e.pageX - e.target.offsetLeft;
-        const y = e.pageY - e.target.offsetTop;
+            frequencyLabel.innerHTML = Math.floor(noteValue) + ' Hz';
+            volumeLabel.innerHTML = Math.floor(volumeValue * 100) + '%';
+        };
 
-        e.target.style.setProperty('--x', `${x}px`);
-        e.target.style.setProperty('--y', `${y}px`);
-        console.log(x);
-        console.log(y);
+
+        // Update the note frequency.
+        SynthPad.updateFrequency = function (event) {
+            if (event.type == 'mousedown' || event.type == 'mousemove') {
+                SynthPad.calculateFrequency(event.x, event.y);
+            } else if (event.type == 'touchstart' || event.type == 'touchmove') {
+                var touch = event.touches[0];
+                SynthPad.calculateFrequency(touch.pageX, touch.pageY);
+            }
+        };
+        return SynthPad;
     }
     
+)();
 
-    SynthPad.setupEventListeners = function() {
-        doocument.body.addEventListener('touchmove', function(event) {
-            event.preventDefault();
-        }, false);
+window.onload = function() {
+    var synthPad = new SynthPad();
+  }
 
-        myCanvas.addEventListener('mousedown', SynthPad.playSound);
-        myCanvas.addEventListener('touchstart', SynthPad.playSound);
 
-        myCanvas.addEventListener('mouseup', SynthPad.stopSound);
-        document.addEventListener('mouseleave', SynthPad.stopSound);
-        myCanvas.addEventListener('touchend', SynthPad.stopSound); 
-    };
 
-    SynthPad.playSound = function(event) {
+    // create web audio api context
 
-    }
 
-};
+    // create Oscillator node
+    // var oscillator = audioCtx.createOscillator();
+
+    // oscillator.type = 'sine';
+    // oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime) // value in hertz
+    // oscillator.connect(audioCtx.destination);
+    // oscillator.detune.setValueAtTime(80, audioCtx.currentTime);
+    // oscillator.start();
+
+
+    // var audioCtx2 = new (window.AudioContext || window.webkitAudioContext)();
+
+    // // create Oscillator node2
+    // var oscillator2 = audioCtx2.createOscillator();
+
+    // oscillator2.type = 'sawtooth';
+    // oscillator2.frequency.setValueAtTime(400, audioCtx2.currentTime); // value in hertz
+    // oscillator2.connect(audioCtx2.destination);
+    // oscillator2.detune.setValueAtTime(150, audioCtx2.currentTime);
+    // oscillator2.start();
+
+//}
+
+// synthpad function
+
 
 // Export SynthPad.
-return SynthPad;
+// return SynthPad;
