@@ -29,7 +29,6 @@ window.onload = function () {
             console.log(snapshot.key);
             console.log(connectionLog);
 
-
             // If they are connected..
             if (snapshot.val()) {
 
