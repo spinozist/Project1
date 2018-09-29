@@ -29,7 +29,7 @@ window.onload = function () {
 
 // synthpad function
 var SynthPad = function() {
-    myCanvas = document.getElementById('synth-pad');
+    myCanvas = document.getElementById('touchpad');
     frequencyLabel = document.getElementById('frequency');
     volumeLabel = document.getElementById('volume');
   
