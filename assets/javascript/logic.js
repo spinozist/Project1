@@ -1,6 +1,5 @@
 window.onload = function () {
 
-    
     // create web audio api context
     var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -28,16 +27,43 @@ window.onload = function () {
 }
 
 // synthpad function
-var SynthPad = function() {
-    myCanvas = document.getElementById('synth-pad');
-    frequencyLabel = document.getElementById('frequency');
-    volumeLabel = document.getElementById('volume');
-  
+var SynthPad = function () {
+    myCanvas = $('#touchpad');
+    frequency = $('#frequency');
+    volume = $('#volume');
+
     // Create an audio context.
     myAudioContext = new webkitAudioContext();
-  
-    SynthPad.setupEventListeners();
-  };
-  
-  // Export SynthPad.
-  return SynthPad;
+
+    myCanvas.onmousemove = (e) => {
+        const x = e.pageX - e.target.offsetLeft;
+        const y = e.pageY - e.target.offsetTop;
+
+        e.target.style.setProperty('--x', `${x}px`);
+        e.target.style.setProperty('--y', `${y}px`);
+        console.log(x);
+        console.log(y);
+    }
+    
+
+    SynthPad.setupEventListeners = function() {
+        doocument.body.addEventListener('touchmove', function(event) {
+            event.preventDefault();
+        }, false);
+
+        myCanvas.addEventListener('mousedown', SynthPad.playSound);
+        myCanvas.addEventListener('touchstart', SynthPad.playSound);
+
+        myCanvas.addEventListener('mouseup', SynthPad.stopSound);
+        document.addEventListener('mouseleave', SynthPad.stopSound);
+        myCanvas.addEventListener('touchend', SynthPad.stopSound); 
+    };
+
+    SynthPad.playSound = function(event) {
+
+    }
+
+};
+
+// Export SynthPad.
+return SynthPad;
