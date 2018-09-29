@@ -73,16 +73,3 @@ window.onload = function () {
 }
 
 // synthpad function
-var SynthPad = function () {
-    myCanvas = document.getElementById('touchpad');
-    frequencyLabel = document.getElementById('frequency');
-    volumeLabel = document.getElementById('volume');
-
-    // Create an audio context.
-    myAudioContext = new webkitAudioContext();
-
-    SynthPad.setupEventListeners();
-};
-
-// Export SynthPad.
-// return SynthPad;
