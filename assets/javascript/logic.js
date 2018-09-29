@@ -26,3 +26,18 @@ window.onload = function () {
     oscillator2.start();
 
 }
+
+// synthpad function
+var SynthPad = function() {
+    myCanvas = document.getElementById('synth-pad');
+    frequencyLabel = document.getElementById('frequency');
+    volumeLabel = document.getElementById('volume');
+  
+    // Create an audio context.
+    myAudioContext = new webkitAudioContext();
+  
+    SynthPad.setupEventListeners();
+  };
+  
+  // Export SynthPad.
+  return SynthPad;
