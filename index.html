@@ -13,12 +13,13 @@
     <script src="assets/javascript/logic.js"></script>
 </head>
 <body>
+  <br>
     <div id="onload-screen">
 
     </div>
     <div id="user-buttons" class="container">
-      <div class="row offset-s2">
-        <div id="user-you" class="col s2">
+      <div class="row">
+        <div id="user-you" class="col s2 offset-l2">
             <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">play</i></a>
         </div>
         <div id="user2" class="col s2">
@@ -31,8 +32,8 @@
             <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">play</i></a>
         </div>
     </div>
-      <div class="row offset-s2">
-        <div id="user5" class="col s2">
+      <div class="row">
+        <div id="user5" class="col s2  offset-l2">
             <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">play</i></a>
         </div>
         <div id="user6" class="col s2">
@@ -46,17 +47,20 @@
         </div>    
       </div>
     </div>
-        <div id="page-wrapper" class="clearfix">
-            <canvas id="touchpad"></canvas>
-            <div id="info">
-              <p>
-                Frequency: <span id="frequency">n/a</span>
+        <div id="page-wrapper" class="clearfix container">
+          <div class="row">
+            <canvas id="touchpad" class="col s8 offset-l2"></canvas>
+          </div>
+          <div id="info" class="row">
+            <div class="col l8 offset-l2">
+            <p class="light red-text">Frequency: <span id="frequency" >n/a</span>
               </p>
-              <p>
+              <p class="light red-text">
                 Volume: <span id="volume">n/a</span>
               </p>
-            </div>
           </div>
+        </div> 
+        </div>
 
 </body>
 </html>
