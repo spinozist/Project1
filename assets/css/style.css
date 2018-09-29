@@ -6,15 +6,10 @@ html, body {
 
 };  
 
-#touchpad {
+#touchpad, img {
 
-  background-color: rgb(97, 96, 96);
   position: absolute;
-  width: 500px;
-  height: 350px;
+ 
+  overflow: auto;
 
-}
-
-#info {
-   /* color: white;*/
 }
